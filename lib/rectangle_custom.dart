@@ -22,12 +22,10 @@ class RectangleCustom extends CustomPainter {
       ..drawCircle(Offset(0, size.height / 3), 100, paint1);
 
     final TextSpan textSpanName = TextSpan(
-        style: GoogleFonts.berkshireSwash(
-            fontSize: 35, color: Colors.white, fontWeight: FontWeight.normal),
+        style: style(),
         text: name);
     final TextSpan textSpanFamily = TextSpan(
-        style: GoogleFonts.berkshireSwash(
-            fontSize: 30, color: Colors.white, fontWeight: FontWeight.normal),
+        style: style(),
         text: family);
     final TextPainter tp = TextPainter(
         text: textSpanName,
@@ -40,9 +38,13 @@ class RectangleCustom extends CustomPainter {
         textDirection: TextDirection.ltr);
     tp.layout();
     tp2.layout();
-    tp.paint(canvas, Offset(-60, size.height / 4.1));
-    tp2.paint(canvas, Offset(-60, (size.height / 4.1) + 40));
+    tp.paint(canvas, Offset(-30, size.height / 4.2));
+
+    //tp2.paint(canvas, Offset(-50, (size.height / 4.1)+50));
   }
+
+  TextStyle style() => GoogleFonts.poppins(
+          fontSize: 20, color: Colors.white, fontWeight: FontWeight.normal);
 
   @override
   bool shouldRepaint(covariant final CustomPainter oldDelegate) => true;

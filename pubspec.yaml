@@ -38,6 +38,10 @@ dependencies:
   get: ^4.3.8
   google_fonts: ^2.1.0
   font_awesome_flutter: ^9.2.0
+  url_launcher: ^6.0.13
+  internet_file: ^1.0.0+1
+  animate_do: ^2.1.0
+  animated_text_kit: ^4.2.1
 
 dev_dependencies:
   flutter_test:

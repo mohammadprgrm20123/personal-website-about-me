@@ -1,11 +1,11 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:my_profile_web_site/about/about.dart';
 
+import '../../about/about.dart';
 import '../../controllers/home_controller.dart';
 import '../../rectangle_custom.dart';
 import '../../utils/utils.dart';
@@ -20,38 +20,39 @@ class HomePage extends GetView<HomeController> {
   Widget build(final BuildContext context) {
     Get.lazyPut(() => HomeController());
     return Scaffold(
-      body: Stack(
-        children: [
-          Row(
-            children: [
-              _image(),
-              _customPaint(),
-            ],
-          ),
-          const Header(),
-        ],
+      body: FadeIn(
+        child: Stack(
+          children: [
+            Row(
+              children: [
+                _image(),
+                _customPaint(context),
+              ],
+            ),
+            const Header(),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _customPaint() => Expanded(
+  Widget _customPaint(final BuildContext context) => Expanded(
         flex: 3,
         child: CustomPaint(
           size: Size.infinite,
           painter: RectangleCustom(
               color: Utils.backgroundColor,
-              name: 'mohammad',
-              family: 'kazeminejad'),
+              name: 'Mohammad \nKazeminejad',family: ''),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Expanded(
                 child: SizedBox(
-                  height: Get.height/2.5,
+                  height: Get.height / 2.5,
                   child: Obx(() => IndexedStack(
                         index: controller.currentIndex.value,
-                        children:  const [About()],
+                        children: const [About()],
                       )),
                 ),
               ),
@@ -81,25 +82,38 @@ class HomePage extends GetView<HomeController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             Padding(
-              padding: EdgeInsets.all(2.0),
-              child: MyIcon(icon: FaIcon(FontAwesomeIcons.facebook)),
+              padding: const EdgeInsets.all(2.0),
+              child: MyIcon(
+                icon: const FaIcon(FontAwesomeIcons.instagram),
+                onTap: () {
+                  Utils.launchURL(Utils.instagram);
+                },
+              ),
             ),
             Padding(
-              padding: EdgeInsets.all(2.0),
-              child: MyIcon(icon: FaIcon(FontAwesomeIcons.github)),
+              padding: const EdgeInsets.all(2.0),
+              child: MyIcon(
+                icon: const FaIcon(FontAwesomeIcons.github),
+                onTap: () {
+                  Utils.launchURL(Utils.githubLink);
+                },
+              ),
             ),
             Padding(
-                padding: EdgeInsets.all(2.0),
+                padding: const EdgeInsets.all(2.0),
                 child: MyIcon(
-                  icon: FaIcon(FontAwesomeIcons.facebook),
+                  icon: const FaIcon(FontAwesomeIcons.linkedin),
+                  onTap: () {
+                    Utils.launchURL(Utils.linkDin);
+                  },
                 ))
           ],
         ),
       );
 
-  Expanded _image() => Expanded(
+  Widget _image() => const Expanded(
         flex: 2,
         child: MyImage(),
       );

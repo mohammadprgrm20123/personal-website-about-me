@@ -1,17 +1,25 @@
-import 'package:flutter/cupertino.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../utils/utils.dart';
+
 
 class MyImage extends StatelessWidget {
-  @override
-  Widget build(final BuildContext context) =>  ColorFiltered(
-        colorFilter: const ColorFilter.mode(Utils.blueGreen, BlendMode.color),
-        child: Image.asset(
-          'lib/assets/image/me.jpg',
-          fit: BoxFit.fitHeight,
-          height: Get.height + 100,
-        ),
-      );
+  const MyImage({final Key? key}) : super(key: key);
 
+  @override
+  Widget build(final BuildContext context) => FadeIn(
+    child: SizedBox(
+          height: context.height,
+          child: ColorFiltered(
+            colorFilter:
+                ColorFilter.mode(Colors.cyan.shade200 , BlendMode.color),
+            child: const Image(
+              image: NetworkImage('https://mohammadkazeminejad.ir/me.JPG',),
+              fit: BoxFit.cover,
+              semanticLabel: 'mohammad kazeminejad',
+              excludeFromSemantics: true,
+            ),
+          ),
+        ),
+  );
 }

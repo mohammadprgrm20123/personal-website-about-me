@@ -1,3 +1,6 @@
+
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,7 +16,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => _header();
 
-  Padding _header() => Padding(
+  Widget _header() => Padding(
         padding: const EdgeInsets.all(20.0),
         child: Container(
           width: double.infinity,
@@ -23,45 +26,60 @@ class Header extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Row(
-                  children: [
-                    const MyIcon(
-                        icon: FaIcon(
-                      FontAwesomeIcons.connectdevelop,
-                      color: Colors.lightBlue,
-                    )),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('M.kazeminejad',
-                          style: GoogleFonts.daysOne(color: Colors.white)),
-                    ),
-                  ],
-                ),
-              ),
+              _name(),
               const Expanded(child: SizedBox()),
-              text('about'),
-              text('resume'),
               downloadCv(),
             ],
           ),
         ),
       );
 
+  Widget _name() => Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Row(
+          children: [
+            MyIcon(
+              icon: const FaIcon(
+                FontAwesomeIcons.connectdevelop,
+                color: Colors.lightBlue,
+              ),
+              onTap: () {},
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('M.kazeminejad',
+                  style: GoogleFonts.daysOne(color: Colors.white)),
+            ),
+          ],
+        ),
+      );
+
   Widget downloadCv() => Padding(
         padding: const EdgeInsets.all(4.0),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(color: Colors.white, width: 2)),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                _downloadCv(),
-                const FaIcon(FontAwesomeIcons.cloudDownloadAlt,size: 13,color: Colors.white,)
-              ],
+        child: GestureDetector(
+          onTap: () async {
+             AnchorElement(
+                href:
+                'https://mohammadkazeminejad.ir/resume.pdf')
+              ..download = 'pdf'
+              ..click();
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(color: Colors.white, width: 2)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  _downloadCv(),
+                  const FaIcon(
+                    FontAwesomeIcons.cloudDownloadAlt,
+                    size: 13,
+                    color: Colors.white,
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -79,7 +97,7 @@ class Header extends StatelessWidget {
               padding: const EdgeInsets.only(right: 20),
               child: Text(
                 text,
-                style: TextStyle(color: Colors.white,fontSize: size.value),
+                style: TextStyle(color: Colors.white, fontSize: size.value),
               ),
             ),
           ),

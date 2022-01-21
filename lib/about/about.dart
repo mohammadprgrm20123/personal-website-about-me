@@ -1,7 +1,10 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_profile_web_site/utils/utils.dart';
 
 class About extends StatelessWidget {
   final String about = 'Mohammad, I am an Android programmer I have been '
@@ -25,41 +28,62 @@ class About extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: Text(
-                about,
-                style: GoogleFonts.openSans(color: Colors.white),
-              ),
+              padding: const EdgeInsets.all(8.0),
+              child: AnimatedTextKit(
+                  isRepeatingAnimation: false,
+                  animatedTexts: [
+                TyperAnimatedText(
+                  about,
+                  curve: Curves.easeOutQuad,
+                  textStyle: GoogleFonts.openSans(color: Colors.white),
+                ),
+              ]),
             ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'contact me',
-                          style: GoogleFonts.openSans(color: Colors.white),
-                        ),
-                      ),
-                      const FaIcon(
-                        FontAwesomeIcons.whatsapp,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            )
+            _contactMe()
           ],
         ),
+      );
+
+  Widget _contactMe() => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ObxValue<Rx<Color>>(
+            (final color) => MouseRegion(
+                  onEnter: (final value) {
+                    color.value = Utils.blueGreen;
+                  },
+                  onExit: (final value) {
+                    color.value = Colors.white;
+                  },
+                  child: GestureDetector(
+                    onTap: Utils.openWhatsapp,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: color.value, width: 2),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'contact me',
+                                style:
+                                    GoogleFonts.openSans(color: Colors.white),
+                              ),
+                            ),
+                            FaIcon(
+                              FontAwesomeIcons.whatsapp,
+                              color: color.value,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            Colors.white.obs),
       );
 }
