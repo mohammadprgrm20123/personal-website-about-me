@@ -39,7 +39,7 @@ class About extends StatelessWidget {
                 ),
               ]),
             ),
-            _contactMe()
+            //_contactMe()
           ],
         ),
       );

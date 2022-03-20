@@ -38,13 +38,14 @@ class RectangleCustom extends CustomPainter {
         textDirection: TextDirection.ltr);
     tp.layout();
     tp2.layout();
-    tp.paint(canvas, Offset(-30, size.height / 4.2));
+
+    tp.paint(canvas, Offset(-30, size.height / 4.1));
 
     //tp2.paint(canvas, Offset(-50, (size.height / 4.1)+50));
   }
 
-  TextStyle style() => GoogleFonts.poppins(
-          fontSize: 20, color: Colors.white, fontWeight: FontWeight.normal);
+  TextStyle style() => GoogleFonts.pacifico(
+          fontSize: 35, color: Colors.white, fontWeight: FontWeight.normal);
 
   @override
   bool shouldRepaint(covariant final CustomPainter oldDelegate) => true;
