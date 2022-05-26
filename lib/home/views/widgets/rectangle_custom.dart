@@ -19,7 +19,7 @@ class RectangleCustom extends CustomPainter {
       ..style = PaintingStyle.fill;
     canvas
       ..drawRect(Offset.zero & Size(size.width, size.height), paint1)
-      ..drawCircle(Offset(0, size.height / 3), 100, paint1);
+      ..drawCircle(Offset(0, size.height / 3), 120, paint1);
 
     final TextSpan textSpanName = TextSpan(
         style: style(),
@@ -39,7 +39,7 @@ class RectangleCustom extends CustomPainter {
     tp.layout();
     tp2.layout();
 
-    tp.paint(canvas, Offset(-30, size.height / 4.1));
+    tp.paint(canvas, Offset(-90, size.height / 4.5));
 
     //tp2.paint(canvas, Offset(-50, (size.height / 4.1)+50));
   }

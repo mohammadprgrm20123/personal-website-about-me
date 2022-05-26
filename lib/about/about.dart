@@ -27,18 +27,15 @@ class About extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AnimatedTextKit(
-                  isRepeatingAnimation: false,
-                  animatedTexts: [
-                TyperAnimatedText(
-                  about,
-                  curve: Curves.easeOutQuad,
-                  textStyle: GoogleFonts.openSans(color: Colors.white),
-                ),
-              ]),
-            ),
+            AnimatedTextKit(
+                isRepeatingAnimation: false,
+                animatedTexts: [
+              TyperAnimatedText(
+                about,
+                curve: Curves.easeInOut,
+                textStyle: GoogleFonts.poppins(color: Colors.white),
+              ),
+            ]),
             //_contactMe()
           ],
         ),

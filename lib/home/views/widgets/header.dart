@@ -1,4 +1,3 @@
-
 import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
@@ -7,10 +6,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../controllers/home_controller.dart';
 import '../../../utils/utils.dart';
+import 'mouse_region_text.dart';
 import 'my_icon.dart';
 
-class Header extends StatelessWidget {
+class Header extends GetView<HomeController> {
   const Header({final Key? key}) : super(key: key);
 
   @override
@@ -28,6 +29,45 @@ class Header extends StatelessWidget {
             children: [
               _name(),
               const Expanded(child: SizedBox()),
+              const SizedBox(
+                width: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  controller.pageController.animateToPage(1,
+                      duration: const Duration(milliseconds: 800),
+                      curve: Curves.fastOutSlowIn);
+                },
+                child: const MouseRegionText(
+                  text: 'Skills',
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  controller.pageController.animateToPage(2,
+                      duration: const Duration(milliseconds: 800),
+                      curve: Curves.fastOutSlowIn);
+                },
+                child: const MouseRegionText(
+                  text: 'Portfolio',
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  controller.pageController.animateToPage(3,
+                      duration: const Duration(milliseconds: 800),
+                      curve: Curves.fastOutSlowIn);
+                },
+                child: const MouseRegionText(
+                  text: 'About',
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
               downloadCv(),
             ],
           ),
@@ -58,9 +98,7 @@ class Header extends StatelessWidget {
         padding: const EdgeInsets.all(4.0),
         child: GestureDetector(
           onTap: () async {
-             AnchorElement(
-                href:
-                'https://mohammadkazeminejad.ir/resume.pdf')
+            AnchorElement(href: 'https://mohammadkazeminejad.ir/resume.pdf')
               ..download = 'pdf'
               ..click();
           },
@@ -105,9 +143,6 @@ class Header extends StatelessWidget {
 
   Widget _downloadCv() => const Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.0),
-        child: Text(
-          'Download cv',
-          style: TextStyle(color: Colors.white, fontSize: 14),
-        ),
+        child: MouseRegionText(text: 'Download CV'),
       );
 }
